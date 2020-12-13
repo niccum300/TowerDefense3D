@@ -21,12 +21,11 @@ public class WaveSpawner : MonoBehaviour
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
+            waveCountdownText.text = waveIndex.ToString();
             countdown = timeBetweenWaves;
         }
 
         countdown -= Time.deltaTime;
-
-        waveCountdownText.text = Math.Round(countdown).ToString();
     }
 
     IEnumerator SpawnWave()

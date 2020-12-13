@@ -11,26 +11,37 @@ public class Node : MonoBehaviour
     private Renderer rend;
     private Material startMaterial;
 
+    BuildManager buildManager;
+
     void Start()
     {
         rend = GetComponent<Renderer>();
         startMaterial = rend.material;
+
+        buildManager = BuildManager.instance;
     }
 
     void OnMouseDown()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
+
         if (turret != null)
         {
             rend.material = hoverMaterialError;
             return;
         }
 
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        GameObject turretToBuild = buildManager.GetTurretToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        buildManager.ClearTurretToBuild();
     }
 
     void OnMouseEnter()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
+
         if (turret != null)
         {
             rend.material = hoverMaterialError;

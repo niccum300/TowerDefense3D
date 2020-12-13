@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4488874538678900122}
   - component: {fileID: -5729520052326352541}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: StandardTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4defe1abbaf512346a8d23cdef2bd604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
+  range: 10
   fireRate: 1
   enemyTag: Enemy
   partToRotate: {fileID: 4161632687634626416}
