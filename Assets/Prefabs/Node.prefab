@@ -108,3 +108,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: f25d2b71e90dc3d4ab6a57eba1803839, type: 2}
   hoverMaterialError: {fileID: 2100000, guid: a24487d8bd81a06468003f8e668dded2, type: 2}
+  positionOffset: {x: 0, y: 0.5, z: 0}
