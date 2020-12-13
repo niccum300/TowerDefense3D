@@ -6,10 +6,13 @@ public class Node : MonoBehaviour
     public Material hoverMaterialError;
     public Vector3 positionOffset;
 
-    private GameObject turret;
-
     private Renderer rend;
     private Material startMaterial;
+
+    [Header("Optional")]
+    public GameObject turret;
+
+
 
     BuildManager buildManager;
 
@@ -21,25 +24,35 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + positionOffset;
+    }
+
     void OnMouseDown()
     {
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
+
+        if (buildManager.BuildTurretOn(this))
+        {
+            buildManager.ClearTurretToBuild();
+            rend.material = hoverMaterial;
+        }
+        else
+            return;
+
 
         if (turret != null)
         {
             rend.material = hoverMaterialError;
             return;
         }
-
-        GameObject turretToBuild = buildManager.GetTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        buildManager.ClearTurretToBuild();
     }
 
     void OnMouseEnter()
     {
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
 
         if (turret != null)

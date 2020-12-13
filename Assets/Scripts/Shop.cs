@@ -2,6 +2,8 @@
 
 public class Shop : MonoBehaviour
 {
+    public TurretBlueprint standardTurret;
+
     BuildManager buildManager;
 
     void Start()
@@ -9,8 +11,11 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    public void PurchaseStandardTurret()
+    public void SelectStandardTurret()
     {
-        buildManager.SetTurretToBuild(buildManager.standardTurretPrefab);
+        if (PlayerStats.Money < standardTurret.cost)
+            return;
+        
+        buildManager.SelectTurretToBuild(standardTurret);
     }
 }

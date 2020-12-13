@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class StandardTurret : MonoBehaviour
 {
     private Transform target;
 

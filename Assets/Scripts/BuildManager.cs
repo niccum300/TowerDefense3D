@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
@@ -16,16 +17,22 @@ public class BuildManager : MonoBehaviour
 
     public GameObject standardTurretPrefab;
 
-    private GameObject turretToBuild;
+    private TurretBlueprint turretToBuild;
 
-    public GameObject GetTurretToBuild()
-    {
-        return turretToBuild;
-    }
-
-    public void SetTurretToBuild(GameObject turret)
+    public void SelectTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
+    }
+
+    public bool CanBuild { get { return turretToBuild != null; } }
+
+    public bool BuildTurretOn(Node node)
+    {
+        PlayerStats.Money -= turretToBuild.cost;
+
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.turret = turret;
+        return true;
     }
 
     public void ClearTurretToBuild()
