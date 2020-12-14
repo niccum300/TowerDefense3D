@@ -2,22 +2,16 @@
 
 public class PlayerStats : MonoBehaviour
 {
-    public static PlayerStats instance;
     public static int Money;
     public int startMoney = 400;
 
-    void Awake()
-    { 
-        instance = this;
-    }
+    public static int Lives;
+    public int startLives = 20;
+
 
     void Start()
     {
         Money = startMoney;
-    }
-
-    public void adjustMoney(int money)
-    {
-        Money += money;
+        Lives = startLives;
     }
 }
