@@ -18,6 +18,9 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameEnded)
+            return;
+
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
@@ -37,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveIndex++;
+        PlayerStats.Rounds++;
     }
 
     void SpawnEnemy()

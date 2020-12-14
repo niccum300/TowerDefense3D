@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameEnded)
+            return;
+
         if (target == null)
         {
             Destroy(gameObject);

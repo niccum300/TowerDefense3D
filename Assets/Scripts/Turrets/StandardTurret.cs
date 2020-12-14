@@ -51,6 +51,9 @@ public class StandardTurret : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameEnded)
+            return;
+
         if (target == null)
             return;
 

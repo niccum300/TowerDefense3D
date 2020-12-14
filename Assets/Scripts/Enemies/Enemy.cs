@@ -35,6 +35,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameEnded)
+            return;
+
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
