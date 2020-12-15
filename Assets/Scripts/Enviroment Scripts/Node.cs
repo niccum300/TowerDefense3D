@@ -31,6 +31,13 @@ public class Node : MonoBehaviour
 
     void OnMouseDown()
     {
+
+        if (turret != null)
+        {
+            buildManager.SelectNode(this);
+            return;
+        }
+
         if (!buildManager.CanBuild)
             return;
 
@@ -41,13 +48,6 @@ public class Node : MonoBehaviour
         }
         else
             return;
-
-
-        if (turret != null)
-        {
-            rend.material = hoverMaterialError;
-            return;
-        }
     }
 
     void OnMouseEnter()
