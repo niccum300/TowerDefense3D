@@ -9,8 +9,12 @@ public class Node : MonoBehaviour
     private Renderer rend;
     private Material startMaterial;
 
-    [Header("Optional")]
+    [HideInInspector]
     public GameObject turret;
+    [HideInInspector]
+    public TurretBlueprint turretBlueprint;
+    [HideInInspector]
+    public bool isUpgraded = false;
 
 
 
@@ -41,13 +45,34 @@ public class Node : MonoBehaviour
         if (!buildManager.CanBuild)
             return;
 
-        if (buildManager.BuildTurretOn(this))
-        {
-            buildManager.ClearTurretToBuild();
-            rend.material = hoverMaterial;
-        }
-        else
+        BuildTurret(buildManager.GetTurretToBuild());
+    }
+
+    void BuildTurret(TurretBlueprint blueprint)
+    {
+        PlayerStats.Money -= blueprint.cost;
+
+        GameObject _turret = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        turret = _turret;
+
+        turretBlueprint = blueprint;
+        
+        buildManager.ClearTurretToBuild();
+    }
+
+    public void UpgradeTurret()
+    {
+        if (PlayerStats.Money < turretBlueprint.upgradeCost)
             return;
+
+        PlayerStats.Money -= turretBlueprint.upgradeCost;
+
+        Destroy(turret);
+
+        GameObject _turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        turret = _turret;
+
+        isUpgraded = true;
     }
 
     void OnMouseEnter()
